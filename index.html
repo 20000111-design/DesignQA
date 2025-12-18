@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>網頁版客戶需求表</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平面設計需求引導</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #06C755;
+            --bg: #fdfdfd;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+        }
+
+        body { 
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+        }
+
+        #app { width: 100%; max-width: 450px; padding: 20px; box-sizing: border-box; }
+
+        .step { 
+            display: none; 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 24px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+            animation: fadeIn 0.5s ease both;
+        }
+
+        .active { display: block; }
+
+        h2 { font-size: 22px; margin-bottom: 8px; letter-spacing: -0.5px; }
+        p.desc { font-size: 14px; color: var(--text-sub); margin-bottom: 25px; line-height: 1.5; }
+
+        /* 選項按鈕通用樣式 */
+        .option-group { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+        button.option { 
+            display: flex; align-items: center; text-align: left; padding: 12px;
+            border: 1.5px solid #f0f0f0; border-radius: 16px; background: white;
+            transition: all 0.2s ease; cursor: pointer; position: relative; overflow: hidden;
+        }
+
+        button.option:hover { border-color: var(--accent); background: #fafffb; }
+
+        /* 風格預覽圖片樣式 */
+        .style-thumb {
+            width: 70px; height: 70px; border-radius: 10px;
+            margin-right: 15px; object-fit: cover; background: #eee;
+        }
+
+        .option-content { flex: 1; }
+        .option-title { display: block; font-size: 16px; font-weight: 600; color: var(--primary); }
+        .option-sub { display: block; font-size: 12px; color: var(--text-sub); margin-top: 3px; }
+
+        /* 預算與類別按鈕微調 */
+        .type-btn { padding: 20px !important; }
+
+        .submit-btn { 
+            width: 100%; padding: 18px; background: var(--primary); color: white; 
+            border: none; border-radius: 16px; font-size: 16px; font-weight: bold; 
+            cursor: pointer; margin-top: 25px; transition: 0.3s;
+        }
+        .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 總結區塊 */
+        #summary-box { background: #f8f9fa; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px dashed #ddd; }
+        .summary-item { font-size: 14px; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div id="step1" class="step active">
+        <h2>👋 您好！<br>想委託哪類設計？</h2>
+        <p class="desc">請選擇您目前最主要的開發項目</p>
+        <div class="option-group">
+            <button class="option type-btn" onclick="next(1, '品牌視覺 (Logo/VI)')">
+                <div class="option-content">
+                    <span class="option-title">💎 品牌視覺 (Logo/VI)</span>
+                    <span class="option-sub">標誌設計、名片、品牌色彩規範</span>
+                </div>
+            </button>
+            <button class="option type-btn" onclick="next(1, '社群行銷貼文')">
+                <div class="option-content">
+                    <span class="option-title">📱 社群行銷貼文</span>
+                    <span class="option-sub">FB/IG 視覺、廣告圖、限動模板</span>
+                </div>
+            </button>
+            <button class="option type-btn" onclick="next(1, '印刷與包裝')">
+                <div class="option-content">
+                    <span class="option-title">📦 印刷與包裝設計</span>
+                    <span class="option-sub">書籍排版、海報、產品包裝盒</span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div id="step2" class="step">
+        <h2>偏好哪種風格？</h2>
+        <p class="desc">請選出最接近您心目中理想調性的圖示</p>
+        <div class="option-group">
+            <button class="option" onclick="next(2, '極簡現代')">
+                <img src="https://placehold.co/100x100/f0f0f0/333?text=Minimal" class="style-thumb">
+                <div class="option-content">
+                    <span class="option-title">極簡現代</span>
+                    <span class="option-sub">大量留白、簡練線條</span>
+                </div>
+            </button>
+            <button class="option" onclick="next(2, '日系清新')">
+                <img src="https://placehold.co/100x100/e8f5e9/2e7d32?text=Japan" class="style-thumb">
+                <div class="option-content">
+                    <span class="option-title">日系清新</span>
+                    <span class="option-sub">輕柔色調、自然溫暖</span>
+                </div>
+            </button>
+            <button class="option" onclick="next(2, '經典優雅')">
+                <img src="https://placehold.co/100x100/fff8e1/8d6e63?text=Elegant" class="style-thumb">
+                <div class="option-content">
+                    <span class="option-title">經典優雅</span>
+                    <span class="option-sub">細緻字體、沈穩氣質</span>
+                </div>
+            </button>
+            <button class="option" onclick="next(2, '美式復古')">
+                <img src="https://placehold.co/100x100/efebe9/4e342e?text=Vintage" class="style-thumb">
+                <div class="option-content">
+                    <span class="option-title">美式復古</span>
+                    <span class="option-sub">懷舊配色、強烈個性</span>
+                </div>
+            </button>
+            <button class="option" onclick="next(2, '大膽前衛')">
+                <img src="https://placehold.co/100x100/f3e5f5/7b1fa2?text=Future" class="style-thumb">
+                <div class="option-content">
+                    <span class="option-title">大膽前衛</span>
+                    <span class="option-sub">鮮艷對比、突破常規</span>
+                </div>
+            </button>
+            <button class="option" 
+                    onclick="next(2, '童趣插畫')">
+                <img src="https://placehold.co/100x100/e1f5fe/0288d1?text=Playful" class="style-thumb">
+                <div class="option-content">
+                    <span class="option-title">童趣插畫</span>
+                    <span class="option-sub">手繪感、活潑親切</span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div id="step3" class="step">
+        <h2>您的預算規劃？</h2>
+        <p class="desc">這能幫助我提供最符合成本效益的執行方案</p>
+        <div class="option-group">
+            <button class="option type-btn" onclick="next(3, '10,000 - 30,000')">10,000 - 30,000</button>
+            <button class="option type-btn" onclick="next(3, '30,000 - 50,000')">30,000 - 50,000</button>
+            <button class="option type-btn" onclick="next(3, '50,000 以上')">50,000 以上</button>
+        </div>
+    </div>
+
+    <div id="step4" class="step">
+        <h2>確認您的需求 ✍️</h2>
+        <div id="summary-box"></div>
+        <button class="submit-btn" onclick="sendToLine()">確認送出，開始諮詢</button>
+    </div>
+</div>
+
+<script>
+    let result = {};
+    
+    // 重要：請在此處填入你申請到的 LIFF ID
+    const MY_LIFF_ID = "你的_LIFF_ID_在此"; 
+
+    liff.init({ liffId: MY_LIFF_ID }).then(() => {
+        if (!liff.isLoggedIn()) { liff.login(); }
+    }).catch(err => console.error("LIFF 初始化失敗", err));
+
+    function next(step, value) {
+        if(step === 1) result.type = value;
+        if(step === 2) result.style = value;
+        if(step === 3) result.budget = value;
+        
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + (step + 1)).classList.add('active');
+        
+        if(step === 3) {
+            document.getElementById('summary-box').innerHTML = `
+                <div class="summary-item"><span>專案類別</span> <strong>${result.type}</strong></div>
+                <div class="summary-item"><span>視覺風格</span> <strong>${result.style}</strong></div>
+                <div class="summary-item"><span>預算規劃</span> <strong>${result.budget}</strong></div>
+            `;
+        }
+    }
+
+    function sendToLine() {
+        const finalMsg = `📬 【新的設計詢價需求】\n━━━━━━━━━━━━\n● 專案類別：${result.type}\n● 視覺風格：${result.style}\n● 預算規劃：${result.budget}\n━━━━━━━━━━━━\n請稍候，我將儘快為您提供建議！`;
+        
+        liff.sendMessages([{ type: 'text', text: finalMsg }])
+            .then(() => {
+                liff.closeWindow();
+            })
+            .catch(err => {
+                alert("訊息送出失敗，請確保在 LINE App 內開啟");
+                console.error(err);
+            });
+    }
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
